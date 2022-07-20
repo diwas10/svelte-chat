@@ -13,7 +13,7 @@
 		<Input
 			name='search'
 			placeholder='Search Users' value={search}
-			on:keypress={(e)=>{if(e.key==="Enter"){console.log(search)}}} className='px-7 py-2'
+			on:keypress={(e)=>{if(e.key==="Enter"){console.log(search)}}} className=''
 		/>
 	</div>
 	<div class='px-3	 py-3'>

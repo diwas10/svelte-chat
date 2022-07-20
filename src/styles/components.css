@@ -1,15 +1,15 @@
 /******************* BUTTONS  *******************/
 
 .btn {
-    @apply border inline-flex justify-center rounded-md shadow-sm px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm generic-transition;
+    @apply border inline-flex justify-center rounded-md shadow-sm px-4 py-2 text-base font-medium sm:w-auto sm:text-sm generic-transition;
 }
 
 .btn-primary {
-    @apply btn bg-primary text-white border-primary text-center hover:bg-opacity-90;
+    @apply btn bg-primary text-white border-primary text-center hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
 }
 
-.btn-gary {
-    @apply btn border-gray-300 text-gray-700 hover:bg-gray-50 text-white;
+.btn-gray {
+    @apply btn border-gray-300 text-gray-700 hover:bg-gray-50 text-white text-gray-700;
 }
 
 .btn-close{
@@ -37,19 +37,23 @@
 /****************** MODAL ******************/
 
 .modal-header{
-    @apply flex flex-shrink-0 items-center justify-between px-6 py-5;
+    @apply flex flex-shrink-0 items-center justify-between px-6 py-5 dark:bg-dark-5;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 
 .modal-footer{
-    @apply flex flex-wrap flex-shrink-0 items-center justify-end px-6 py-5;
+    @apply flex flex-wrap flex-shrink-0 items-center justify-end px-6 py-5 dark:bg-dark-5;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
 
 .modal-content{
-    @apply overflow-hidden bg-white shadow-xl rounded-bl-2xl rounded-tr-2xl rounded-tl-2xl rounded-br-2xl;
+    @apply overflow-hidden bg-white shadow-xl rounded-bl-2xl rounded-tr-2xl rounded-tl-2xl rounded-br-2xl dark:bg-dark-4 w-full;
+}
+
+.modal-body{
+    @apply px-6 py-5 dark:bg-dark-4;
 }
 
 .modal-wrapper{
@@ -57,15 +61,19 @@
 }
 
 .modal-md{
-    max-width:768px;
+    max-width:500px;
 }
 
 .modal-lg{
-    max-width:1200px;
+    max-width:700px;
+}
+
+.modal-sm{
+    max-width:300px;
 }
 
 /******************* FORM *******************/
 
 .form-control {
-	@apply focus:ring-indigo-500 dark:bg-dark-1 dark:text-dark-w text-lg border focus:border-indigo-500 block w-full shadow-sm sm:text-sm dark:border-dark-3 border-gray-300 rounded-xl py-1.5 px-3;
+	@apply focus:ring-indigo-500 dark:bg-dark-1 dark:text-dark-w text-lg border focus:border-indigo-500 block w-full shadow-sm sm:text-sm dark:border-dark-3 border-gray-300 rounded-xl px-5 py-2.5;
 }

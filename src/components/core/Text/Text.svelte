@@ -1,9 +1,11 @@
 <script lang='ts'>
+	import classNames from 'classnames';
+
 	export let variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'display1' | 'display2' = 'p';
 	export let className = '';
 	export let typeface: 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' = 'normal';
-	export let darkFont: string;
-	export let lightFont: string;
+	export let darkFont = '';
+	export let lightFont = '';
 
 	const switchClassName = () => {
 		switch (variant) {
@@ -27,12 +29,14 @@
 				return 'text-base';
 		}
 	};
+
+	const classes = classNames(switchClassName(), `font-${typeface}`, className, lightFont ?? 'text-gray-900', {
+		[`dark:${darkFont}`]: !!darkFont,
+		['dark:text-dark-w']: !darkFont
+	});
 </script>
 
-<svelte:element
-	this={variant}
-	class='{switchClassName() + ` ${darkFont ?? "dark:text-dark-w"} ${lightFont ?? "text-gray-900"} font-${typeface} ${className}`}'
->
+<svelte:element this={variant} class='{classes}'>
 	<slot></slot>
 </svelte:element>
 

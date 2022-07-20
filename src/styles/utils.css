@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .generic-transition{
     @apply duration-100 transition ease-in
 }

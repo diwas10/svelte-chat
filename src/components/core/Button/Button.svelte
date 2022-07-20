@@ -7,12 +7,12 @@
 	export let loading = false;
 	export let variant: 'primary' | 'gray' = 'primary';
 
-	const classes = classNames({ [`btn-${variant}`]: true, className });
+	const classes = classNames({ [`btn-${variant}`]: true, [`${className}`]: className });
 
 
 </script>
 
-<button type='{type}' class='btn {classes}'>
+<button type='{type}' class='{classes}'>
 	{#if loading}
 		<Spinner />
 	{:else}
