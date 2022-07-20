@@ -1,0 +1,23 @@
+#wrapper {
+	@apply h-screen
+}
+
+.app-wrapper-layout {
+	@apply flex h-full;
+}
+
+.app-height {
+	@apply h-full;
+}
+
+.app-flex-layout {
+	@apply flex h-full flex-col w-full
+}
+
+.app-main-layout {
+	@apply flex-grow
+}
+
+.app-absolute-layout {
+	@apply absolute left-0 right-0 top-0 bottom-0 w-full h-full ;
+}

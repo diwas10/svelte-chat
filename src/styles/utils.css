@@ -1,0 +1,33 @@
+.generic-transition{
+    @apply duration-100 transition ease-in
+}
+
+/* scrollbar */
+.scrollable {
+	overflow: auto;
+	/* width */
+	/* Track */
+	/* Handle */
+	/* Handle on hover */
+	transition: all 0.3s ease-out;
+}
+
+.scrollable::-webkit-scrollbar {
+	width: 4px;
+	height: 6px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+	@apply bg-gray-100 dark:bg-dark-1;
+	border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+	background: #75757a;
+	border-radius: 4px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+	background: #75757a;
+	cursor: pointer;
+}
