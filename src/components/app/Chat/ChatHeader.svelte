@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import ThemeSwitchButton from '../utils/ThemeSwithButton.svelte';
+	import ThemeSwitchButton from '../utils/ThemeSwitchButton.svelte';
 	import Text from '../../core/Text/Text.svelte';
 </script>
 

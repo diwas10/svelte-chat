@@ -1,79 +1,82 @@
 /******************* BUTTONS  *******************/
 
 .btn {
-    @apply border inline-flex justify-center rounded-md shadow-sm px-4 py-2 text-base font-medium sm:w-auto sm:text-sm generic-transition;
+	@apply border inline-flex justify-center rounded-lg shadow-sm px-4 py-3 text-base font-medium sm:text-sm generic-transition uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-opacity-10;
 }
 
 .btn-primary {
-    @apply btn bg-primary text-white border-primary text-center hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary;
+	@apply btn bg-primary text-white border-primary text-center hover:bg-opacity-90 focus:ring-primary;
 }
 
 .btn-gray {
-    @apply btn border-gray-300 text-gray-700 hover:bg-gray-50 text-white text-gray-700;
+	@apply btn border-gray-300 text-gray-700 dark:text-dark-w dark:bg-dark-3 dark:border-dark-3 text-gray-700 dark:focus:ring-dark-3;
 }
 
-.btn-close{
-    @apply cursor-pointer text-black font-bold text-base px-1.5 py-0.5 rounded generic-transition hover:bg-gray-300;
+.btn-close {
+	@apply cursor-pointer text-black font-bold text-base px-1.5 py-0.5 rounded generic-transition hover:bg-gray-300;
 }
-
 
 /******************* CARD *******************/
 
-.card{
-    @apply bg-white rounded-lg shadow-2xl overflow-hidden cursor-pointer relative flex flex-col;
+.card {
+	@apply bg-white rounded-lg shadow-2xl overflow-hidden cursor-pointer relative flex flex-col;
 }
 
-.card-body{
-    flex: 1 1 auto;
-    @apply p-4 text-left;
+.card-body {
+	flex: 1 1 auto;
+
+	@apply p-4 text-left;
 }
 
 /******************* LINKS *******************/
 
-.link{
-    @apply border-b-2 border-transparent generic-transition flex items-center w-fit text-primary hover:border-primary;
+.link {
+	@apply border-b-2 border-transparent generic-transition flex items-center w-fit text-primary hover:border-primary;
 }
 
 /****************** MODAL ******************/
 
-.modal-header{
-    @apply flex flex-shrink-0 items-center justify-between px-6 py-5 dark:bg-dark-5;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+.modal-header {
+	@apply flex flex-shrink-0 items-center justify-between px-6 py-5;
+
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
 }
 
-.modal-footer{
-    @apply flex flex-wrap flex-shrink-0 items-center justify-end px-6 py-5 dark:bg-dark-5;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
+.modal-footer {
+	@apply flex flex-wrap flex-shrink-0 items-center justify-end px-6 py-5;
+
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
 }
 
-.modal-content{
-    @apply overflow-hidden bg-white shadow-xl rounded-bl-2xl rounded-tr-2xl rounded-tl-2xl rounded-br-2xl dark:bg-dark-4 w-full;
+.modal-content {
+	@apply overflow-hidden bg-white shadow-xl rounded-bl-2xl rounded-tr-2xl rounded-tl-2xl rounded-br-2xl dark:bg-dark-2 w-full;
 }
 
-.modal-body{
-    @apply px-6 py-5 dark:bg-dark-4;
+.modal-body {
+	@apply px-6 py-5;
 }
 
-.modal-wrapper{
-    @apply inline-block w-full max-w-md overflow-hidden text-left align-middle transition-all transform;
+.modal-wrapper {
+	@apply inline-block w-full max-w-md overflow-hidden text-left align-middle transition-all transform;
 }
 
-.modal-md{
-    max-width:500px;
+.modal-md {
+	max-width: 500px;
 }
 
-.modal-lg{
-    max-width:700px;
+.modal-lg {
+	max-width: 700px;
 }
 
-.modal-sm{
-    max-width:300px;
+.modal-sm {
+	max-width: 300px;
 }
 
 /******************* FORM *******************/
 
 .form-control {
-	@apply focus:ring-indigo-500 dark:bg-dark-1 dark:text-dark-w text-lg border focus:border-indigo-500 block w-full shadow-sm sm:text-sm dark:border-dark-3 border-gray-300 rounded-xl px-5 py-2.5;
+	@apply dark:bg-dark-1 dark:text-dark-w text-lg border block w-full shadow-sm sm:text-sm dark:border-dark-a/20 border-gray-300 rounded-lg px-5 py-3 mt-1 generic-transition dark:shadow-none focus:border-primary focus:ring-primary focus:outline-0;
+	outline: none;
 }

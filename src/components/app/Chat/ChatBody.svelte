@@ -18,15 +18,15 @@
 	</div>
 	<div class='w-full max-w-3xl mx-auto pb-4'>
 		<div
-			class='flex overflow-hidden rounded-2xl p-2 shadow-lg dark:border dark:border-dark-3 bg-white dark:bg-dark-1'>
+			class='flex overflow-hidden items-center rounded-2xl p-2 shadow-lg dark:border dark:border-dark-a/20 bg-white dark:bg-dark-1'>
 			<input
 				type='text'
 				class='form-control rounded-none border-0 shadow-none focus:ring-0 outline-0'
 				placeholder={"Type a Message..."}
-				style='outline: none'
+				style='outline: none; border: none; box-shadow: none;'
 			>
 			<button
-				class='p-1 h-10 w-10'>
+				class='p-1 h-10 w-10 mt-1'>
 				<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
 						 xmlns:xlink='http://www.w3.org/1999/xlink'>
 					<path class='fill-primary'

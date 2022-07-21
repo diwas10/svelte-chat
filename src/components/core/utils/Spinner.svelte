@@ -1,8 +1,17 @@
-<script>
+<script lang='ts'>
+	import classNames from 'classnames';
+
 	export let className = '';
+	export const size: 'sm' | 'md' | 'lg' = 'md';
+
+	const classes = classNames(className, {
+		['h-5 w-5']: size === 'sm',
+		['h-8 w-8']: size === 'md',
+		['h-10 w-10']: size === 'lg'
+	});
 </script>
 
-<svg class='animate-spin -ml-1 mr-3 h-5 w-5 text-white {className}' xmlns='http://www.w3.org/2000/svg' fill='none'
+<svg class='animate-spin -ml-1 mr-3 text-white {classes}' xmlns='http://www.w3.org/2000/svg' fill='none'
 		 viewBox='0 0 24 24'>
 	<circle class='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'></circle>
 	<path class='opacity-75' fill='currentColor'

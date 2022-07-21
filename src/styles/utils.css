@@ -2,16 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-.generic-transition{
-    @apply duration-100 transition ease-in
+.generic-transition {
+	@apply transition duration-100 ease-in;
 }
+
+*{
+	@apply generic-transition;
+}
+
 
 /* scrollbar */
 .scrollable {
 	overflow: auto;
+
 	/* width */
+
 	/* Track */
+
 	/* Handle */
+
 	/* Handle on hover */
 	transition: all 0.3s ease-out;
 }
@@ -23,6 +32,7 @@
 
 .scrollable::-webkit-scrollbar-track {
 	@apply bg-gray-100 dark:bg-dark-1;
+
 	border-radius: 4px;
 }
 
