@@ -1,5 +1,6 @@
 import type * as Yup from 'yup';
 import { writable } from 'svelte/store';
+import type { InputChangeEvent, InputFocusEvent } from './form.schema';
 
 interface HandleForm {
 	initialValues: { [key: string]: any };
@@ -14,37 +15,38 @@ const handleForm = ({ initialValues, validationSchema, onSubmit }: HandleForm) =
 	const touched = writable({});
 	const errors = writable({});
 
-	const handleChange = (e: HTMLInputElement) => {
-		values.update((value) => ({ ...value, [e.name]: e.value }));
+	const handleChange = (e: InputChangeEvent<HTMLInputElement>) => {
+		values.update((value) => ({ ...value, [e.currentTarget?.name]: e.currentTarget?.value }));
 	};
 
-	const handleBlur = (e: HTMLInputElement) => {
-		touched.update((state) => ({ ...state, [e.name]: true }));
+	const handleBlur = (e: InputFocusEvent<HTMLInputElement>) => {
+		touched.update((state) => ({ ...state, [e.currentTarget?.name]: true }));
 	};
 
-	const handleSubmit = (form: SubmitEvent) => {
+	const handleSubmit = async (form: SubmitEvent) => {
 		form.preventDefault();
 		Object.keys(initialValues).forEach((key) => {
 			touched.update((state) => ({ ...state, [key]: true }));
 		});
 
-		let isFormValid = false;
+		let formValues;
+		values.subscribe((value) => (formValues = value));
 
 		if (validationSchema) {
-			validationSchema
-				.validate(values, { abortEarly: false })
-				.then(() => (isFormValid = true))
-				.catch((validationErrors: Yup.ValidationError) => {
-					validationErrors.inner.forEach((validationError) => {
-						errors.update((error) => ({
-							...error,
-							[validationError.name]: validationErrors.errors[0]
-						}));
-					});
-				});
-		} else isFormValid = true;
+			try {
+				const value = await validationSchema.validate(formValues, { abortEarly: false });
+				onSubmit(value);
+			} catch (err) {
+				const validationErrors = err as Yup.ValidationError;
 
-		if (isFormValid) values.subscribe((value) => onSubmit(value));
+				validationErrors.inner.forEach((validationError) => {
+					errors.update((error) => ({
+						...error,
+						[validationError.path as string]: validationErrors.errors[0],
+					}));
+				});
+			}
+		} else values.subscribe(onSubmit);
 	};
 
 	return { values, errors, touched, handleBlur, handleChange, handleSubmit };

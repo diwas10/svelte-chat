@@ -1,21 +1,13 @@
 <script lang='ts'>
-	import { afterUpdate } from 'svelte';
-	import { chatUsers } from '../../../store/chat.store';
+	import type { InputChangeEvent, InputFocusEvent } from '../../../config/Form/form.schema';
 
 	export let placeholder = '';
 	export let name;
 	export let type: 'text' | 'number' | 'password' = 'text';
 	export let className = '';
-	export let value;
-	export let id = name;
-
-	const handleInputChange = (e) => {
-		value = e.target.value;
-	};
-
-	afterUpdate(() => {
-		console.log(value, 'value');
-	});
+	export let onInput: (e: InputChangeEvent<HTMLInputElement>) => void;
+	export let onBlur: (e: InputFocusEvent<HTMLInputElement>) => void;
+	export let value = '';
 
 </script>
 
@@ -23,8 +15,8 @@
 	{type}
 	{name}
 	{value}
-	{id}
 	{placeholder}
-	on:input={(e)=>handleInputChange(e)}
+	on:input={onInput}
 	class='form-control {className}'
+	on:blur={onBlur}
 >

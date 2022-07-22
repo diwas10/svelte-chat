@@ -2,11 +2,24 @@
 	import { Button, Modal, ModalBody, ModalFooter, Text, Input, ModalHeader } from '../../core';
 	import { isAuthenticated } from '../../../store/auth.store.js';
 	import ThemeSwitchButton from './ThemeSwitchButton.svelte';
+	import handleForm from '../../../config/Form/handleForm';
+	import * as Yup from 'yup';
 
-	let values = '';
+	const initialValues = { username: '' };
 
-	const handleSubmit = () => {
-		console.log(values);
+	const validationSchema = Yup.object().shape({
+		username: Yup.string().required()
+	});
+
+	const { values, handleChange, handleBlur, touched, handleSubmit, errors } = handleForm({
+		initialValues,
+		onSubmit: (data) => handleFormSubmit(data),
+		validationSchema
+	});
+
+	const handleFormSubmit = (data) => {
+		console.log('$values, $touched, data');
+		console.log($values, $touched, data);
 	};
 
 </script>
@@ -28,14 +41,17 @@
 				<Text variant='h3' typeface='semibold' className='text-center'>Login or Register to Continue</Text>
 			</div>
 		</ModalHeader>
-		<form on:submit|preventDefault='{handleSubmit}'>
+		<form on:submit='{handleSubmit}'>
 			<ModalBody className='text-left'>
 				<div>
 					<Text darkFont='text-gray-400'>Username</Text>
-					<Input name='username' value='{values}' />
+					<Input name='username' value='{$values.username}' onInput='{handleChange}' onBlur='{handleBlur}' />
 				</div>
 				<div class='mt-3'>
 					<Text darkFont='text-gray-400'>Password</Text>
+					{#if $errors.username}
+						<div>{$errors.username}</div>
+					{/if}
 					<!--					<Input name='password' type='password' value='{values}' />-->
 				</div>
 			</ModalBody>
