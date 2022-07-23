@@ -35,6 +35,7 @@ const handleForm = ({ initialValues, validationSchema, onSubmit }: HandleForm) =
 		if (validationSchema) {
 			try {
 				const value = await validationSchema.validate(formValues, { abortEarly: false });
+				errors.update(() => ({}));
 				onSubmit(value);
 			} catch (err) {
 				const validationErrors = err as Yup.ValidationError;

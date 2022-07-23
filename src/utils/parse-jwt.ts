@@ -1,6 +1,6 @@
 import TokenService from '../service/Token/token.service';
 
-const parseJwt = <T = { [key: string]: string }>(token = TokenService.getToken()) => {
+const parseJwt = <T = { [key: string]: string }>(token = TokenService.getToken()): T | null => {
 	if (!token) return null;
 
 	try {
@@ -9,14 +9,15 @@ const parseJwt = <T = { [key: string]: string }>(token = TokenService.getToken()
 		const jsonPayload: string = decodeURIComponent(
 			atob(base64)
 				.split('')
-				.map(function (c) {
+				.map(function(c) {
 					return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 				})
-				.join('')
+				.join(''),
 		);
 		return JSON.parse(jsonPayload) as T;
 	} catch (e) {
 		console.warn('Error validating token');
+		return null;
 	}
 };
 

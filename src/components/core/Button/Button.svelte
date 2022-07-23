@@ -5,14 +5,16 @@
 	export let className = '';
 	export let type: 'submit' | 'button' | 'reset' = 'submit';
 	export let loading = false;
-	export let variant: 'primary' | 'gray' = 'primary';
+	export let variant: 'primary' | 'gray' | 'close' = 'primary';
+	export let disabled = false;
+	export let onClick;
 
 	const classes = classNames({ [`btn-${variant}`]: true, [`${className}`]: className });
 
 
 </script>
 
-<button type='{type}' class='{classes}'>
+<button on:click={onClick} {type} class='{classes}' {disabled}>
 	{#if loading}
 		<Spinner />
 	{:else}

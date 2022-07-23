@@ -1,5 +1,6 @@
 <script lang='ts'>
 	import { onMount } from 'svelte';
+	import { Button } from '../../core';
 
 	let isDark = false;
 
@@ -37,10 +38,10 @@
 
 </script>
 
-<button
+<Button
 	type='button'
-	class='text-gray-500 dark:text-gray-400 rounded-full p-2 dark:bg-gray-900 bg-gray-200'
-	on:click={toggleThemeMode}
+	variant='close'
+	onClick='{toggleThemeMode}'
 >
 	<svg
 		class='{(isDark ? "hidden" :"") + " w-5 h-5"}'
@@ -64,4 +65,4 @@
 			clip-rule='evenodd'
 		></path>
 	</svg>
-</button>
+</Button>

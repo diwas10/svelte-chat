@@ -2,10 +2,15 @@ import parseJwt from '../../utils/parse-jwt';
 
 const tokenKey = 'TOKEN';
 
+interface TokenData {
+	username: string;
+	id: string;
+}
+
 const getToken = () => {
 	let token = '';
 	try {
-		token = localStorage.getItem(btoa(tokenKey)) ?? '';
+		token = localStorage.getItem(tokenKey) ?? '';
 	} catch (err) {
 		console.log('Local Storage Get Error');
 	}
@@ -14,24 +19,24 @@ const getToken = () => {
 
 const setToken = (token: string) => {
 	try {
-		localStorage.setItem(atob(tokenKey), token);
+		localStorage.setItem(tokenKey, token);
 	} catch (err) {
-		console.log('Local Storage Set Error');
+		console.log('Local Storage Set Error', err);
 	}
 };
 
 const clearToken = () => {
 	try {
-		localStorage.removeItem(btoa(tokenKey));
+		localStorage.removeItem(tokenKey);
 	} catch (err) {
 		console.log('Local Storage Remove Error');
 	}
 };
 
 const getTokenData = () => {
-	let data = null;
+	let data: TokenData | null = null;
 	try {
-		data = parseJwt();
+		data = parseJwt<TokenData>();
 	} catch (err) {
 		console.log('Parse JWT Error');
 	}
@@ -42,7 +47,7 @@ const TokenService = {
 	getToken,
 	setToken,
 	clearToken,
-	getTokenData
+	getTokenData,
 };
 
 export default TokenService;

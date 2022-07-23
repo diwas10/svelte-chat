@@ -4,7 +4,7 @@
 	export let variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'display1' | 'display2' = 'p';
 	export let className = '';
 	export let typeface: 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' = 'normal';
-	export let darkFont = '';
+	export let darkFontClass = '';
 	export let lightFont = '';
 
 	const switchClassName = () => {
@@ -30,9 +30,9 @@
 		}
 	};
 
-	const classes = classNames(switchClassName(), `font-${typeface}`, className, lightFont ?? 'text-gray-900', {
-		[`dark:${darkFont}`]: !!darkFont,
-		['dark:text-dark-w']: !darkFont
+	const classes = classNames(switchClassName(), `font-${typeface}`, className, lightFont ?? 'text-gray-800', {
+		[`dark:${darkFontClass}`]: !!darkFontClass,
+		['dark:text-dark-w']: !darkFontClass,
 	});
 </script>
 

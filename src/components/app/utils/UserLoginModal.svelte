@@ -1,25 +1,30 @@
 <script lang='ts'>
 	import { Button, Modal, ModalBody, ModalFooter, Text, Input, ModalHeader } from '../../core';
-	import { isAuthenticated } from '../../../store/auth.store.js';
+	import { handleLogin, isAuthenticated } from '../../../store/auth.store';
+	import type { LoginData } from '../../../store/auth.store';
 	import ThemeSwitchButton from './ThemeSwitchButton.svelte';
 	import handleForm from '../../../config/Form/handleForm';
 	import * as Yup from 'yup';
+	import logo from '../../../assets/images/logo.png';
+	import { Spinner } from '../../core/index.js';
 
-	const initialValues = { username: '' };
+	const { userState, loginAction } = handleLogin;
 
 	const validationSchema = Yup.object().shape({
-		username: Yup.string().required()
+		username: Yup.string().required(),
+		password: Yup.string().min(6, 'Password must be at least 6 characters.').required('Password is Required!'),
 	});
 
 	const { values, handleChange, handleBlur, touched, handleSubmit, errors } = handleForm({
-		initialValues,
-		onSubmit: (data) => handleFormSubmit(data),
-		validationSchema
+		initialValues: { username: '', password: '' },
+		onSubmit: (data: LoginData) => handleFormSubmit(data),
+		validationSchema,
 	});
 
-	const handleFormSubmit = (data) => {
+	const handleFormSubmit = (data: LoginData) => {
 		console.log('$values, $touched, data');
 		console.log($values, $touched, data);
+		loginAction(data);
 	};
 
 </script>
@@ -31,12 +36,8 @@
 	<Modal isOpen='{!($isAuthenticated)}'>
 		<ModalHeader>
 			<div class='text-center w-full flex justify-center items-center flex-col'>
-				<div class='p-3 bg-primary bg-opacity-10 rounded-full mb-4 h-16 w-16'>
-					<svg xmlns='http://www.w3.org/2000/svg' class='h-full w-full fill-primary' viewBox='0 0 20 20'>
-						<path fill-rule='evenodd'
-									d='M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z'
-									clip-rule='evenodd' />
-					</svg>
+				<div class='p-5 bg-primary bg-opacity-10 rounded-full mb-4 h-20 w-20'>
+					<img src='{logo}' alt=''>
 				</div>
 				<Text variant='h3' typeface='semibold' className='text-center'>Login or Register to Continue</Text>
 			</div>
@@ -44,19 +45,29 @@
 		<form on:submit='{handleSubmit}'>
 			<ModalBody className='text-left'>
 				<div>
-					<Text darkFont='text-gray-400'>Username</Text>
+					<Text>Username</Text>
 					<Input name='username' value='{$values.username}' onInput='{handleChange}' onBlur='{handleBlur}' />
-				</div>
-				<div class='mt-3'>
-					<Text darkFont='text-gray-400'>Password</Text>
-					{#if $errors.username}
+					{#if $errors.username && $touched.username}
 						<div>{$errors.username}</div>
 					{/if}
-					<!--					<Input name='password' type='password' value='{values}' />-->
+				</div>
+				<div class='mt-3'>
+					<Text>Password</Text>
+					<Input name='password' type='password' value='{$values.password}' onInput='{handleChange}'
+								 onBlur='{handleBlur}' />
+					{#if $errors.password && $touched.password}
+						<div>{$errors.password}</div>
+					{/if}
 				</div>
 			</ModalBody>
 			<ModalFooter>
-				<Button className='w-full'>Login</Button>
+				<Button className='w-full'>
+					{#if $userState.loading}
+						<Spinner size='sm' />
+					{:else }
+						Continue
+					{/if}
+				</Button>
 			</ModalFooter>
 		</form>
 	</Modal>

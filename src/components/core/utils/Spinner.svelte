@@ -2,12 +2,12 @@
 	import classNames from 'classnames';
 
 	export let className = '';
-	export const size: 'sm' | 'md' | 'lg' = 'md';
+	export let size: 'sm' | 'md' | 'lg' = 'md';
 
 	const classes = classNames(className, {
 		['h-5 w-5']: size === 'sm',
 		['h-8 w-8']: size === 'md',
-		['h-10 w-10']: size === 'lg'
+		['h-10 w-10']: size === 'lg',
 	});
 </script>
 
