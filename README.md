@@ -1,38 +1,41 @@
-# create-svelte
+# Svelte and Typescript Chat App
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+### [Backend Application in Express](https://github.com/diwas10/express-sqlite-chat)
 
-## Creating a project
+## Work in Progress...
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Libraries Stack
 
-```bash
-# create a new project in the current directory
-npm init svelte
+- Typescript
+- socket.io-client
+- axios
+- tailwind
+- yup
 
-# create a new project in my-app
-npm init svelte my-app
-```
+### Configuration
 
-## Developing
+- Reusable Svelte Components
+- Layout Components
+- Custom Form handler
+- Form Validation with yup
+- Socket.io Configuration
+- Token Service (Handling Tokens)
+- Api Request Service
+- Comprehensive Store Setup with loading, success and data state
+- jwt parser to get the payload
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Features
 
-```bash
-npm run dev
+- Light and Dark Mode
+- One to One Chat
+- Group Chat
+- Login and Register
+- Notification and Sound on Message
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+#### Chat Screen
 
-## Building
+![img.png](static/img.png)
 
-To create a production version of your app:
+#### Login Screen
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+![img.png](static/login.png)

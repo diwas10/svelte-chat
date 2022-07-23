@@ -1,6 +1,7 @@
 import { io } from 'socket.io-client';
+import { getEnvVar } from '../../utils/getEnvVariable';
 
-const URL = import.meta.env.VITE_ENDPOINT;
+const URL = getEnvVar('VITE_ENDPOINT');
 const Socket = io(URL);
 
 Socket.onAny((event, ...args) => {

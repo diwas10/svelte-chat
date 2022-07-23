@@ -4,8 +4,10 @@
 // for information about these interfaces
 // and what to do when importing types
 declare namespace App {
-	// interface Locals {}
-	// interface Platform {}
-	// interface Session {}
-	// interface Stuff {}
+	interface ApiResponse<T = unknown> {
+		data?: T
+		message: string,
+		status: number,
+		success: boolean
+	}
 }

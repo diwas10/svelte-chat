@@ -9,6 +9,7 @@ import type {
 import type { ApiDetailType } from './api-enums';
 import { getRequestHeaders, manageErrorResponse, transformRequestData } from './utils';
 import { sanitizeController } from './utils';
+import { getEnvVar } from '../../utils/getEnvVariable';
 
 interface RequestParam {
 	[key: string]: any;
@@ -37,7 +38,7 @@ const initApiRequest = <TResponse = unknown>(
 	const sanitizedApiDetails = sanitizeController(apiDetails, pathVariables);
 
 	let axiosReqParams: AxiosRequestConfig = {
-		baseURL: import.meta.env.VITE_ENDPOINT,
+		baseURL: getEnvVar('VITE_ENDPOINT'),
 		url: sanitizedApiDetails.apiEndPoint,
 		method: sanitizedApiDetails.requestMethod,
 		responseType: 'json',

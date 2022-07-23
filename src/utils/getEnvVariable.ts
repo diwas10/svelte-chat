@@ -1,4 +1,4 @@
-const getEnvVar = (variable: string) => {
+const getEnvVar = (variable: keyof ImportMetaEnv) => {
 	return import.meta.env[variable];
 };
 
