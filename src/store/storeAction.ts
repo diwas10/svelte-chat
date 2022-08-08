@@ -8,7 +8,7 @@ const storeAction = async <T = any>(details: InitApiRequestArgs, store: Writable
 	try {
 		const response = await initApiRequest<T>(details);
 		store.update(state => ({ ...state, loading: false, success: true, data: response.data }));
-		return response;
+		return response.data;
 	} catch (err) {
 		store.update(state => ({ ...state, data: err, loading: false, error: true }));
 	}
