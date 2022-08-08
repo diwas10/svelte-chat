@@ -11,7 +11,7 @@ const storeAction = async <T = unknown>(details: InitApiRequestArgs, store: Writ
 		const response = await initApiRequest<T>(details);
 		store.update(state => ({ ...state, loading: false, success: true, data: response.data }));
 		if (details.apiDetails.requestMethod !== RequestMethod.GET) toast.success(response.message);
-		return response;
+		return response.data;
 	} catch (err: any) {
 		toast.error(err.message);
 		store.update(state => ({ ...state, data: err, loading: false, error: true }));

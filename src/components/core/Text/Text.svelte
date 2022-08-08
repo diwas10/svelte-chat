@@ -4,8 +4,7 @@
 	export let variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'small' = 'p';
 	export let className = '';
 	export let typeface: 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' = 'normal';
-	export let darkFontClass = '';
-	export let lightFont = '';
+	export let color;
 
 	const switchClassName = () => {
 		switch (variant) {
@@ -28,9 +27,8 @@
 		}
 	};
 
-	const classes = classNames(switchClassName(), `font-${typeface}`, className, lightFont ?? 'text-gray-800', {
-		[`dark:${darkFontClass}`]: !!darkFontClass,
-		['dark:text-dark-w']: !darkFontClass,
+	const classes = classNames(switchClassName(), `font-${typeface}`, className, color, {
+		[`text-gray-800 dark:text-dark-w`]: !color,
 	});
 </script>
 

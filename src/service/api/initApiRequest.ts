@@ -29,7 +29,7 @@ export interface InitApiRequestArgs {
 
 const initApiRequest = <TResponse = unknown>(
 	{ apiDetails, requestData, params, pathVariables, cancelSource }: InitApiRequestArgs,
-): Promise<ApiResponse<TResponse>> => {
+): Promise<AxiosResponse<ApiResponse<TResponse>>> => {
 	// get Request Headers based on apiDetails
 	const headers = getRequestHeaders(apiDetails);
 	// transform Request data

@@ -1,17 +1,17 @@
 <script lang='ts'>
+	import * as Yup from 'yup';
+	import type { LoginData } from '../../../store/auth.store';
 	import { Button, Modal, ModalBody, ModalFooter, Text, Input, ModalHeader } from '../../core';
 	import { handleLogin, isAuthenticated } from '../../../store/auth.store';
-	import type { LoginData } from '../../../store/auth.store';
 	import ThemeSwitchButton from './ThemeSwitchButton.svelte';
 	import handleForm from '../../../config/Form/handleForm';
-	import * as Yup from 'yup';
 	import logo from '../../../assets/images/logo.png';
 	import { Spinner } from '../../core/index.js';
 
 	const { userState, loginAction } = handleLogin;
 
 	const validationSchema = Yup.object().shape({
-		username: Yup.string().required(),
+		username: Yup.string().required('Username is Required!'),
 		password: Yup.string().min(6, 'Password must be at least 6 characters.').required('Password is Required!'),
 	});
 
@@ -22,8 +22,9 @@
 	});
 
 	const handleFormSubmit = (data: LoginData) => {
-		console.log('$values, $touched, data');
-		console.log($values, $touched, data);
+		// console.log('values, $touched, data');
+		console.log($values, $touched, data, 'values, $touched, data');
+		// debugger;
 		loginAction(data);
 	};
 
@@ -48,7 +49,7 @@
 					<Text>Username</Text>
 					<Input name='username' value='{$values.username}' onInput='{handleChange}' onBlur='{handleBlur}' />
 					{#if $errors.username && $touched.username}
-						<div>{$errors.username}</div>
+						<Text variant='display2' color='text-red-600'>{$errors.username}</Text>
 					{/if}
 				</div>
 				<div class='mt-3'>
@@ -56,7 +57,7 @@
 					<Input name='password' type='password' value='{$values.password}' onInput='{handleChange}'
 								 onBlur='{handleBlur}' />
 					{#if $errors.password && $touched.password}
-						<div>{$errors.password}</div>
+						<Text variant='display2' color='text-red-600'>{$errors.password}</Text>
 					{/if}
 				</div>
 			</ModalBody>
