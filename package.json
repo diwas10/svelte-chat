@@ -21,12 +21,15 @@
     "@typescript-eslint/parser": "^5.27.0",
     "autoprefixer": "^10.4.7",
     "axios": "^0.27.2",
+    "bootstrap-icons": "^1.9.1",
+    "classnames": "^2.3.1",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "postcss": "^8.4.14",
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",
+    "socket.io-client": "^4.5.1",
     "stylelint": "^14.9.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^26.0.0",
@@ -37,9 +40,7 @@
     "tslib": "^2.3.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.0",
-    "yup": "^0.32.11",
-    "classnames": "^2.3.1",
-    "socket.io-client": "^4.5.1"
+    "yup": "^0.32.11"
   },
   "type": "module"
 }

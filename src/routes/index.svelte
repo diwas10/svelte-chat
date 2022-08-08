@@ -1,17 +1,11 @@
-<script>
-	import UserSidebar from '../components/app/UserSidebar.svelte';
-	import ChatContainer from '../components/app/Chat/ChatContainer.svelte';
-	import UserLoginModal from '../components/app/utils/UserLoginModal.svelte';
+<script lang='ts'>
 	import { isAuthenticated } from '../store/auth.store';
+	import Chat from '../components/app/Chat/index.svelte';
+	import UserLoginModal from '$components/app/utils/UserLoginModal.svelte';
 </script>
 
 {#if $isAuthenticated}
-	<aside class='w-96'>
-		<UserSidebar />
-	</aside>
-	<div class='w-full flex-grow flex flex-col'>
-		<ChatContainer />
-	</div>
+	<Chat />
 {/if}
 
 <UserLoginModal />

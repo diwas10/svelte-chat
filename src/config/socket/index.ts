@@ -1,11 +1,17 @@
 import { io } from 'socket.io-client';
 import { getEnvVar } from '../../utils/getEnvVariable';
+import TokenService from '../../service/Token/token.service';
 
 const URL = getEnvVar('VITE_ENDPOINT');
-const Socket = io(URL);
+const socket = io(URL, { extraHeaders: { Authorization: `Bearer ${TokenService.getToken()}` } });
 
-Socket.onAny((event, ...args) => {
+socket.onAny((event, ...args) => {
 	console.log(event, args);
+	console.log('User Disconasdddddddddddddddddddddddnedyed');
 });
 
-export default Socket;
+socket.on('disconnect', () => {
+	console.log('User Disconnedyed');
+});
+
+export default socket;

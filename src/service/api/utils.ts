@@ -1,5 +1,5 @@
 import type { ApiDetailType } from './api-enums';
-import type { AxiosBasicCredentials, AxiosError } from 'axios';
+import type { AxiosBasicCredentials, AxiosError, AxiosRequestConfig } from 'axios';
 import type { Primitive } from './api-enums';
 import TokenService from '../Token/token.service';
 
@@ -17,6 +17,15 @@ interface TransformedRequestData {
 	data: any;
 }
 
+export interface ErrorResponse {
+	message: string,
+	data: null,
+	status: number | boolean,
+	noconnection: boolean,
+	config: AxiosRequestConfig<any>,
+	isAxiosError: boolean
+}
+
 const transformRequestData = (apiDetails: ApiDetailType, requestData: any) => {
 	const transformedRequestData: TransformedRequestData = { data: requestData };
 	return transformedRequestData;
@@ -25,7 +34,7 @@ const transformRequestData = (apiDetails: ApiDetailType, requestData: any) => {
 const manageErrorResponse = (error: AxiosError) => {
 	const { message, config, request, response, isAxiosError } = error;
 
-	const errorResponse = {
+	const errorResponse: ErrorResponse = {
 		message: message, // Something happened in setting up the request that triggered an Error
 		data: null,
 		status: response?.status || false,

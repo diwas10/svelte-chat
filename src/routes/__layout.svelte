@@ -1,7 +1,9 @@
-<script>
+<script lang='ts'>
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import Spinner from '../components/core/utils/Spinner.svelte';
+	import { Spinner } from '$components/core';
+	import ToastContainer from '$components/core/Toast/ToastContainer.svelte';
+	import 'bootstrap-icons/font/bootstrap-icons.css';
 
 	let ready = false;
 
@@ -29,4 +31,5 @@
 			</div>
 		{/if}
 	</div>
+	<ToastContainer />
 </div>

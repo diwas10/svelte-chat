@@ -1,6 +1,7 @@
 <script lang='ts'>
 	import ChatUserItem from './Chat/ChatUserItem.svelte';
 	import { Input, Text } from '../core';
+	import UserIcon from '../core/utils/UserIcon.svelte';
 
 	// Socket.on('');
 
@@ -19,7 +20,7 @@
 	<div class='px-3	 py-3'>
 		<Text className='pb-4 pt-3' variant='h5'>All Message</Text>
 		{#each Users as user, index (user)}
-			<ChatUserItem>{user}</ChatUserItem>
+			<ChatUserItem lastMsg='Hello' name='{user}' />
 		{/each}
 	</div>
 </div>

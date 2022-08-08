@@ -80,3 +80,26 @@
     @apply dark:bg-dark-1 dark:text-dark-w text-lg border block w-full shadow-sm sm:text-sm dark:border-dark-a/20 border-gray-300 rounded-lg px-5 py-3 mt-1 generic-transition dark:shadow-none focus:border-primary focus:ring-primary focus:outline-0;
     outline: none;
 }
+
+/******************* Toast *******************/
+.toast-container {
+    @apply fixed top-0 right-1/2 m-5 z-30;
+    transform: translateX(50%);
+}
+
+.toast {
+    @apply rounded-2xl p-5 dark:bg-dark-4 shadow-md flex justify-between items-center generic-transition border-l-4 bg-white;
+    min-width: 22rem;
+}
+
+.toast.error {
+    @apply text-red-700 border-red-700;
+}
+
+.toast.success {
+    @apply text-green-600 border-green-600;
+}
+
+.toast.warn {
+    @apply text-yellow-500 border-yellow-500;
+}

@@ -1,15 +1,19 @@
 import type { InitApiRequestArgs } from '../service/api/initApiRequest';
+import initApiRequest from '../service/api/initApiRequest';
 import type { Writable } from 'svelte/store';
 import type { StoreData } from './store';
-import initApiRequest from '../service/api/initApiRequest';
+import toast from '../components/core/Toast';
+import { RequestMethod } from '../service/api/api-enums';
 
-const storeAction = async <T = any>(details: InitApiRequestArgs, store: Writable<StoreData>) => {
+const storeAction = async <T = unknown>(details: InitApiRequestArgs, store: Writable<StoreData>) => {
 	store.update(state => ({ ...state, loading: true }));
 	try {
 		const response = await initApiRequest<T>(details);
 		store.update(state => ({ ...state, loading: false, success: true, data: response.data }));
+		if (details.apiDetails.requestMethod !== RequestMethod.GET) toast.success(response.message);
 		return response;
-	} catch (err) {
+	} catch (err: any) {
+		toast.error(err.message);
 		store.update(state => ({ ...state, data: err, loading: false, error: true }));
 	}
 };

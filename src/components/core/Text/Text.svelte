@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import classNames from 'classnames';
 
-	export let variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'display1' | 'display2' = 'p';
+	export let variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'small' = 'p';
 	export let className = '';
 	export let typeface: 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' = 'normal';
 	export let darkFontClass = '';
@@ -9,9 +9,7 @@
 
 	const switchClassName = () => {
 		switch (variant) {
-			case 'display2':
-				return 'text-xs';
-			case 'display1':
+			case 'small':
 				return 'text-sm';
 			case 'p' | 'h6' :
 				return 'text-base';

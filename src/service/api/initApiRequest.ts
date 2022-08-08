@@ -58,7 +58,7 @@ const initApiRequest = <TResponse = unknown>(
 	return Axios.request(axiosReqParams)
 		.then((response: AxiosResponse) => response.data)
 		.catch((error: AxiosError) => {
-			return manageErrorResponse(error);
+			throw manageErrorResponse(error);
 		});
 };
 

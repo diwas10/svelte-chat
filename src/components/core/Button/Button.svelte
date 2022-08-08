@@ -10,8 +10,6 @@
 	export let onClick;
 
 	const classes = classNames({ [`btn-${variant}`]: true, [`${className}`]: className });
-
-
 </script>
 
 <button on:click={onClick} {type} class='{classes}' {disabled}>

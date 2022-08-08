@@ -3,3 +3,4 @@ export * from './Text';
 export * from './Form';
 export * from './utils';
 export * from './Button';
+export * from './Toast';
