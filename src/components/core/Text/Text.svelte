@@ -4,7 +4,7 @@
 	export let variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'small' = 'p';
 	export let className = '';
 	export let typeface: 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' = 'normal';
-	export let color;
+	export let color = '';
 
 	const switchClassName = () => {
 		switch (variant) {

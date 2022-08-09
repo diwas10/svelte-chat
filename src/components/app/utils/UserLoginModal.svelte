@@ -1,8 +1,8 @@
 <script lang='ts'>
 	import * as Yup from 'yup';
 	import type { LoginData } from '../../../store/auth.store';
-	import { Button, Modal, ModalBody, ModalFooter, Text, Input, ModalHeader } from '../../core';
 	import { handleLogin, isAuthenticated } from '../../../store/auth.store';
+	import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader, Text } from '../../core';
 	import ThemeSwitchButton from './ThemeSwitchButton.svelte';
 	import handleForm from '../../../config/Form/handleForm';
 	import logo from '../../../assets/images/logo.png';
@@ -17,16 +17,9 @@
 
 	const { values, handleChange, handleBlur, touched, handleSubmit, errors } = handleForm({
 		initialValues: { username: '', password: '' },
-		onSubmit: (data: LoginData) => handleFormSubmit(data),
+		onSubmit: (data: LoginData) => loginAction(data),
 		validationSchema,
 	});
-
-	const handleFormSubmit = (data: LoginData) => {
-		// console.log('values, $touched, data');
-		console.log($values, $touched, data, 'values, $touched, data');
-		// debugger;
-		loginAction(data);
-	};
 
 </script>
 

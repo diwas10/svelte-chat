@@ -9,6 +9,8 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
     "paths": {
       "$components/*": [
         "src/components"

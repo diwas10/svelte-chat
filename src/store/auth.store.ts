@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import TokenService from '../service/Token/token.service';
-import { RequestMethod } from '../service/api/api-enums';
 import type { ApiDetailType } from '../service/api/api-enums';
+import { RequestMethod } from '../service/api/api-enums';
 import { storeInitialData } from './store';
 import storeAction from './storeAction';
 

@@ -1,7 +1,14 @@
 <script>
 	import MessageBox from './MessageBox.svelte';
+	import SocketController from '../../../config/socket/index';
+	import { onMount } from 'svelte';
 
 	let UserChat = ['Hello', 'Hi!', 'How are you', 'All Good! What about you?', 'Great yaar! Its good to talk to you after long time.', 'Same Yaar', 'Good Bye!', 'Bye', 'Hello', 'Hi!', 'How are you', 'All Good! What about you?', 'Great yaar! Its good to talk to you after long time.', 'Same Yaar', 'Good Bye!', 'Bye'];
+
+	onMount(() => {
+		SocketController.emit('message', 'Hello');
+	});
+
 </script>
 
 <div class='rounded-tl-3xl dark:bg-dark-1 bg-gray-100 h-full app-flex-layout'>

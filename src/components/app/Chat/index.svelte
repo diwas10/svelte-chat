@@ -1,7 +1,12 @@
 <script>
 	import UserSidebar from '../UserSidebar.svelte';
 	import ChatContainer from './ChatContainer.svelte';
-	import socket from '../../../config/socket/index.ts';
+	import { onMount } from 'svelte';
+	import SocketController from '../../../config/socket/index';
+
+	onMount(() => {
+		new SocketController();
+	});
 
 </script>
 

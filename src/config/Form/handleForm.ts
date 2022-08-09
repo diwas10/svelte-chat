@@ -45,6 +45,7 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 				? schema.validateAt(field, formValues)
 				: schema.validate(formValues, { abortEarly: false }));
 			errors.update((error) => (field ? { ...error, [field]: '' } : {}));
+			return true;
 		} catch (err) {
 			const validationErrors = err as Yup.ValidationError;
 			const formattedError: any = {};
@@ -57,6 +58,7 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 				);
 
 			errors.update((error) => ({ ...error, ...formattedError }));
+			return false;
 		}
 	};
 
@@ -135,8 +137,10 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 			touched.update((state) => ({ ...state, [key]: true }));
 		});
 
-		if (validationSchema) await validateThroughSchema();
-		else values.subscribe(onSubmit);
+		let isSuccess = true;
+		if (validationSchema) isSuccess = await validateThroughSchema();
+
+		if (isSuccess) values.subscribe(onSubmit);
 	};
 
 	return {

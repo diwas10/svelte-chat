@@ -1,14 +1,7 @@
+import type { AxiosError, AxiosRequestConfig, AxiosResponse, CancelTokenSource, CancelTokenStatic } from 'axios';
 import Axios from 'axios';
-import type {
-	AxiosError,
-	AxiosRequestConfig,
-	AxiosResponse,
-	CancelTokenSource,
-	CancelTokenStatic,
-} from 'axios';
 import type { ApiDetailType } from './api-enums';
-import { getRequestHeaders, manageErrorResponse, transformRequestData } from './utils';
-import { sanitizeController } from './utils';
+import { getRequestHeaders, manageErrorResponse, sanitizeController, transformRequestData } from './utils';
 import { getEnvVar } from '../../utils/getEnvVariable';
 
 interface RequestParam {
@@ -56,7 +49,7 @@ const initApiRequest = <TResponse = unknown>(
 	}
 
 	return Axios.request(axiosReqParams)
-		.then((response: AxiosResponse) => response.data)
+		.then((response: AxiosResponse) => response)
 		.catch((error: AxiosError) => {
 			throw manageErrorResponse(error);
 		});
