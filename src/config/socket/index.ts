@@ -3,15 +3,15 @@ import { getEnvVar } from '../../utils/getEnvVariable';
 import TokenService from '../../service/Token/token.service';
 
 class SocketController {
-	public static URL: string;
-	public static socket: Socket;
+	public URL: string;
+	public socket: Socket;
 	private readonly instance: SocketController;
 
 	constructor() {
 		if (this.instance) return this.instance;
 
-		SocketController.URL = getEnvVar('VITE_ENDPOINT');
-		SocketController.socket = io(SocketController.URL, {
+		this.URL = getEnvVar('VITE_ENDPOINT');
+		this.socket = io(this.URL, {
 			extraHeaders: { Authorization: `Bearer ${TokenService.getToken()}` },
 			autoConnect: false,
 		});
@@ -21,24 +21,23 @@ class SocketController {
 	}
 
 	private init(): void {
-		SocketController.socket.connect();
-		SocketController.socket.onAny((event, ...args) => {
+		this.socket.connect();
+		this.socket.onAny((event, ...args) => {
 			console.log(event, args);
 		});
 
-		SocketController.socket.on('disconnect', () => {
+		this.socket.on('disconnect', () => {
 			console.log('User Disconnected');
 		});
 	}
 
-	public static emit(event: string, payload: any): void {
+	public emit(event: string, payload: any): void {
 		this.socket.emit(event, { ...payload });
 	}
 
-	public static on(event: string, listener: (...args: any[]) => void) {
+	public on(event: string, listener: (...args: any[]) => void) {
 		this.socket.on(event, listener);
 	}
-
 }
 
 export default SocketController;

@@ -36,9 +36,7 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 		let formValues;
 		values.subscribe((value) => (formValues = value));
 
-		const schema = isFunction(validationSchema)
-			? validationSchema(formValues as any)
-			: validationSchema;
+		const schema = isFunction(validationSchema) ? validationSchema(formValues) : validationSchema;
 
 		try {
 			await (field
