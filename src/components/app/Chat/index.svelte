@@ -1,11 +1,15 @@
 <script>
 	import UserSidebar from '../UserSidebar.svelte';
 	import ChatContainer from './ChatContainer.svelte';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import SocketController from '../../../config/socket/index';
 
 	onMount(() => {
 		new SocketController();
+	});
+
+	onDestroy(() => {
+		SocketController.socket.disconnect();
 	});
 
 </script>
