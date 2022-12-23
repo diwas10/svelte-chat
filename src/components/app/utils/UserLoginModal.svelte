@@ -1,14 +1,12 @@
 <script lang='ts'>
-	import * as Yup from 'yup';
 	import type { LoginData } from '../../../store/auth.store';
-	import { handleLogin, isAuthenticated } from '../../../store/auth.store';
-	import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader, Text } from '../../core';
-	import ThemeSwitchButton from './ThemeSwitchButton.svelte';
-	import handleForm from '../../../config/Form/handleForm';
-	import logo from '../../../assets/images/logo.png';
-	import { Spinner } from '../../core/index.js';
+	import { isAuthenticated, loginAction, userState } from '../../../store/auth.store';
 
-	const { userState, loginAction } = handleLogin;
+	import * as Yup from 'yup';
+	import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader, Spinner, Text } from '../../core';
+	import ThemeSwitchButton from './ThemeSwitchButton.svelte';
+	import { handleForm } from '../../../config/Form';
+	import logo from '../../../assets/images/logo.png';
 
 	const validationSchema = Yup.object().shape({
 		username: Yup.string().required('Username is Required!'),
@@ -16,10 +14,12 @@
 	});
 
 	const { values, handleChange, handleBlur, touched, handleSubmit, errors } = handleForm({
-		initialValues: { username: '', password: '' },
+		initialValues: { username: '', password: { name: false } },
 		onSubmit: (data: LoginData) => loginAction(data),
 		validationSchema,
 	});
+
+	touched.subscribe(touch => console.log(touch));
 
 </script>
 

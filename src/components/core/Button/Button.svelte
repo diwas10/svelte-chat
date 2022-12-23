@@ -7,7 +7,7 @@
 	export let loading = false;
 	export let variant: 'primary' | 'gray' | 'close' = 'primary';
 	export let disabled = false;
-	export let onClick;
+	export let onClick: ((e) => void) | undefined = undefined;
 
 	const classes = classNames({ [`btn-${variant}`]: true, [`${className}`]: className });
 </script>

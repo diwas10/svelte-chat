@@ -1,5 +1,5 @@
-import type { Writable } from 'svelte/store';
 import type * as Yup from 'yup';
+import type { Readable } from 'svelte/types/runtime/store';
 
 interface FormValues {
 	[key: string]: any;
@@ -32,18 +32,20 @@ interface FormInitialState<Values> {
 	initialSubmitCount: number;
 }
 
+interface FormState<Values> {
+	errors: Readable<FormErrors<Values>>;
+	touched: Readable<FormTouched<Values>>;
+	values: Readable<Values>;
+	submitCount: Readable<number>;
+}
+
 type SetFieldValue = (name: string, value: any, shouldValidate?: boolean) => void;
 type SetFieldTouched = (name: string, touched: boolean, shouldValidate?: boolean) => void;
 type SetError<Values> = (errors: FormErrors<Values>) => void;
 type SetTouched<Values> = (touched: FormTouched<Values>) => void;
 type SetValues<Values> = (values: Values) => void;
 
-interface FormReturns<Values> {
-	errors: Writable<FormErrors<Values>>;
-	touched: Writable<FormTouched<Values>>;
-	values: Writable<Values>;
-	submitCount: Writable<number>;
-
+interface FormReturns<Values> extends FormState<Values> {
 	handleChange(e: InputChangeEvent<HTMLInputElement>): void;
 
 	handleBlur(e: InputFocusEvent<HTMLInputElement>): void;
@@ -79,6 +81,7 @@ export type {
 	FormValues,
 	FormProps,
 	FormReturns,
+	FormState,
 	FormErrors,
 	FormTouched,
 	FormInitialState,

@@ -2,18 +2,18 @@ import { writable } from 'svelte/store';
 import TokenService from '../service/Token/token.service';
 import type { ApiDetailType } from '../service/api/api-enums';
 import { RequestMethod } from '../service/api/api-enums';
-import { storeInitialData } from './store';
+import { storeInitialData } from './schema';
 import storeAction from './storeAction';
 
-const isAuthenticated = writable(!!TokenService.getToken());
-const user = writable({ ...storeInitialData, data: TokenService.getTokenData() });
+export const isAuthenticated = writable(!!TokenService.getToken());
+export const userState = writable({ ...storeInitialData, data: TokenService.getTokenData() });
 
 const apiDetails: ApiDetailType = {
 	requestMethod: RequestMethod.POST,
 	apiEndPoint: '/auth/token',
 };
 
-interface LoginData {
+export interface LoginData {
 	username: string;
 	password: string;
 }
@@ -24,17 +24,14 @@ interface LoginResponse {
 	token: string;
 }
 
-const loginAction = async (requestData: LoginData) => {
-	const login = await storeAction<LoginResponse>({ apiDetails, requestData }, user);
+export const loginAction = async (requestData: LoginData) => {
+	const login = await storeAction<LoginResponse>({ apiDetails, requestData }, userState);
 
 	if (login?.status) {
 		TokenService.setToken(login.data?.token);
 		isAuthenticated.update(() => true);
 	}
+	debugger;
+
 	return login?.data;
 };
-
-const handleLogin = { userState: user, loginAction };
-
-export { isAuthenticated, handleLogin };
-export type { LoginData };

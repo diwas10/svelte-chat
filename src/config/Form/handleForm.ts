@@ -1,7 +1,9 @@
 import type * as Yup from 'yup';
 import type * as Types from './form.schema';
+import type { FormState } from './form.schema';
 import { isFunction } from './utils';
 import { FormDispatchType, formReducer } from './form.reducer';
+import { get } from 'svelte/store';
 
 const initialErrors: Types.FormErrors<unknown> = {};
 const initialTouched: Types.FormTouched<unknown> = {};
@@ -20,12 +22,13 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 		validateOnBlur = true,
 	} = args;
 
-	const { values, touched, errors, submitCount, dispatch } = formReducer<Values>({
-		initialErrors,
-		initialSubmitCount: 0,
-		initialTouched,
-		initialValues,
-	});
+	const { writableValues, writableTouched, writableErrors, writableSubmitCount, dispatch } =
+		formReducer<Values>({
+			initialErrors,
+			initialSubmitCount: 0,
+			initialTouched,
+			initialValues,
+		});
 
 	/**
 	 * Runs the whole or field validation based on the field parameter
@@ -34,7 +37,7 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 	const validateThroughSchema = async (field?: string) => {
 		if (!validationSchema) return;
 		let formValues;
-		values.subscribe((value) => (formValues = value));
+		writableValues.subscribe((value) => (formValues = value));
 
 		const schema = isFunction(validationSchema) ? validationSchema(formValues) : validationSchema;
 
@@ -42,7 +45,7 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 			await (field
 				? schema.validateAt(field, formValues)
 				: schema.validate(formValues, { abortEarly: false }));
-			errors.update((error) => (field ? { ...error, [field]: '' } : {}));
+			writableErrors.update((error) => (field ? { ...error, [field]: '' } : {}));
 			return true;
 		} catch (err) {
 			const validationErrors = err as Yup.ValidationError;
@@ -55,7 +58,7 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 						(formattedError[validationError.path as string] = validationError.errors[0]),
 				);
 
-			errors.update((error) => ({ ...error, ...formattedError }));
+			writableErrors.update((error) => ({ ...error, ...formattedError }));
 			return false;
 		}
 	};
@@ -128,27 +131,26 @@ const handleForm = <Values extends Types.FormValues = Types.FormValues>(
 	 */
 	const handleSubmit = async (event: SubmitEvent) => {
 		event.preventDefault();
-
-		dispatch({ type: FormDispatchType.SUBMIT_COUNT });
-
-		Object.keys(initialValues).forEach((key) => {
-			touched.update((state) => ({ ...state, [key]: true }));
-		});
+		dispatch({ type: FormDispatchType.SUBMIT_ATTEMPT });
 
 		let isSuccess = true;
 		if (validationSchema) isSuccess = await validateThroughSchema();
 
-		if (isSuccess) values.subscribe(onSubmit);
+		if (isSuccess) onSubmit(get(writableValues));
+	};
+
+	const formState: FormState<Values> = {
+		values: writableValues,
+		errors: writableErrors,
+		touched: writableTouched,
+		submitCount: writableSubmitCount,
 	};
 
 	return {
-		values,
-		errors,
-		touched,
+		...formState,
 		handleBlur,
 		handleChange,
 		handleSubmit,
-		submitCount,
 		setFieldValue,
 		setFieldTouched,
 		setError,

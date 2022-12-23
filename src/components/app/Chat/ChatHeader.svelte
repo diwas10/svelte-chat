@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import ThemeSwitchButton from '../utils/ThemeSwitchButton.svelte';
-	import { Text, Button } from '../../core';
+	import { Button, Text } from '../../core';
 	import TokenService from '../../../service/Token/token.service';
 	import { isAuthenticated } from '../../../store/auth.store';
 
